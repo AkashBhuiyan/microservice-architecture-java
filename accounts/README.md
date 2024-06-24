@@ -15,3 +15,13 @@ docker ps <br/>
 
 >Start by container id
 >> docker start "CONTAINER ID"
+
+#### Docker image push
+
+docker image push docker.io/akash9229/accounts:v1
+
+#### Docker account login
+> docker login -u "akash9229" docker.io
+
+##### Pull image
+docker pull akash9229/accounts:v1

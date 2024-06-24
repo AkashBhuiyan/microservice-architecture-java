@@ -5,3 +5,6 @@
 
 > build image
 >> mvn compile jib:build
+
+#### Pull image
+docker pull akash9229/cards:v1
