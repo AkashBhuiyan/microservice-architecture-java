@@ -17,3 +17,12 @@ spring:
 
 build:
   version: "1.0"
+
+accounts:
+  message: "Welcome to Bank accounts related local APIs "
+  contactDetails:
+    name: "Akash - Developer"
+    email: "akash@example.com"
+  onCallSupport:
+    - +8801XXXXXXXXX
+    - +8801XXXXXXXX1
