@@ -18,8 +18,8 @@ spring:
 build:
   version: "3.0"
 
-accounts:
-  message: "Welcome to Bank accounts related local APIs "
+cards:
+  message: "Welcome to Bank cards related local APIs "
   contactDetails:
     name: "Akash - Developer"
     email: "akash@example.com"

@@ -18,8 +18,8 @@ spring:
 build:
   version: "1.0"
 
-accounts:
-  message: "Welcome to Bank accounts related prod APIs "
+cards:
+  message: "Welcome to Bank cards related prod APIs "
   contactDetails:
     name: "Kim - Product Owner"
     email: "kim@example.com"

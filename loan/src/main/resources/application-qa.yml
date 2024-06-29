@@ -18,8 +18,8 @@ spring:
 build:
   version: "2.0"
 
-accounts:
-  message: "Welcome to Bank accounts related qa APIs "
+loan:
+  message: "Welcome to Bank loan related qa APIs "
   contactDetails:
     name: "John - QA Lead"
     email: "john@example.com"
