@@ -5,7 +5,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: accounts-service
+    name: "accounts"
   profiles:
     active: '@spring.active.profile@'
 
@@ -22,3 +22,5 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  config:
+    import: "optional:configserver:http://localhost:8071"
