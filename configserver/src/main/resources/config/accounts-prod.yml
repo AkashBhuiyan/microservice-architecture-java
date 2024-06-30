@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+accounts:
+  message: "Welcome to Bank accounts related prod APIs "
+  contactDetails:
+    name: "Kim - Product Owner"
+    email: "kim@example.com"
+  onCallSupport:
+    - +8801XXXXXXXXX
+    - +8801XXXXXXXX1

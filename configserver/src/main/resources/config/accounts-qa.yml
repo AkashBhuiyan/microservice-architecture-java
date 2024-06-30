@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+accounts:
+  message: "Welcome to Bank accounts related qa APIs "
+  contactDetails:
+    name: "John - QA Lead"
+    email: "john@example.com"
+  onCallSupport:
+    - +8801XXXXXXXXX
+    - +8801XXXXXXXX2
