@@ -1,10 +1,8 @@
-profilename: prod
-
 build:
   version: "1.0"
 
-accounts:
-  message: "Welcome to Bank accounts related prod APIs "
+loan:
+  message: "Welcome to Bank loan related prod APIs "
   contactDetails:
     name: "Kim - Product Owner"
     email: "kim@example.com"

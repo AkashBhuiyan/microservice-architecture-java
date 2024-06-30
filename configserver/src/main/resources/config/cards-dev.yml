@@ -1,10 +1,8 @@
-profilename: dev
-
 build:
   version: "3.0"
 
-accounts:
-  message: "Welcome to Bank accounts related local APIs "
+loan:
+  message: "Welcome to Bank loan related local APIs "
   contactDetails:
     name: "Akash - Developer"
     email: "akash@example.com"
