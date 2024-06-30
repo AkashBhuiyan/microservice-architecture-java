@@ -1,8 +1,8 @@
 build:
   version: "3.0"
 
-loan:
-  message: "Welcome to Bank loan related local APIs "
+cards:
+  message: "Welcome to Bank cards related local APIs "
   contactDetails:
     name: "Akash - Developer"
     email: "akash@example.com"

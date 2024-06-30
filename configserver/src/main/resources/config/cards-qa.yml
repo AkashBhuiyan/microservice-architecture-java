@@ -1,8 +1,8 @@
 build:
   version: "2.0"
 
-loan:
-  message: "Welcome to Bank loan related qa APIs "
+cards:
+  message: "Welcome to Bank cards related qa APIs "
   contactDetails:
     name: "John - QA Lead"
     email: "john@example.com"
