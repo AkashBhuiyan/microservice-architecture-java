@@ -7,7 +7,8 @@ spring:
     config:
       server:
         native:
-          search-locations: "classpath:/config"
+          #search-locations: "classpath:/config"
+          search-locations: "file://home/akash/Project/config # configurattion from file services
 
 server:
   port: 8071
