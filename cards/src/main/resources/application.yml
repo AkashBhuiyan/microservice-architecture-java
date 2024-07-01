@@ -5,6 +5,8 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: cards-service
+    name: "cards"
   profiles:
     active: '@spring.active.profile@'
+  config:
+    import: "optional:configserver:http://localhost:8071"
