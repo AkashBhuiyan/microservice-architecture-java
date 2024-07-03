@@ -16,5 +16,8 @@ spring:
           timeout: 5
           clone-on-start: true
           force-pull: true
+encrypt:
+  key: "COMPLEXKEYFORENCRYPTDYCRYPTITCANBEANYCOMPLEXTEXT" # it will encrypt and decrypt our properties
+
 server:
   port: 8071
