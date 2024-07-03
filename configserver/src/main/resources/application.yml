@@ -2,14 +2,14 @@ spring:
   application:
     name: "configserver"
   profiles:
-    active: git
-    #active: native
+    #active: git
+    active: native
   cloud:
     config:
       server:
         native:
           #search-locations: "classpath:/config"
-          search-locations: "file:/home/akash/Project/config" # configurattion from file services
+          search-locations: "file:/home/akashbhuiyan/Learning/config" # configurattion from file services
         git:
           uri: "https://github.com/AkashBhuiyan/microservice-architecture-java-configs.git"
           default-label: main

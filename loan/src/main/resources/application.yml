@@ -10,3 +10,9 @@ spring:
     active: '@spring.active.profile@'
   config:
     import: "optional:configserver:http://localhost:8071"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # enable and expose all management endpoint supported by the spring boot actuator
