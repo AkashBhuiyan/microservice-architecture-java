@@ -10,6 +10,12 @@ spring:
     active: '@spring.active.profile@'
   config:
     import: "optional:configserver:http://localhost:8071"
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    stream:
+      username: "guest"
+      password: "guest"
 
 management:
   endpoints:
