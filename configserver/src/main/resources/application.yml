@@ -2,8 +2,8 @@ spring:
   application:
     name: "configserver"
   profiles:
-    #active: git
-    active: native
+    active: git
+    #active: native
   cloud:
     config:
       server:
@@ -16,6 +16,20 @@ spring:
           timeout: 5
           clone-on-start: true
           force-pull: true
+  #Refresh configurations at runtime using Spring Cloud Bus
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    stream:
+      username: "guest"
+      password: "guest"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # enable and expose all management endpoint supported by the spring boot actuator
+
 encrypt:
   key: "COMPLEXKEYFORENCRYPTDYCRYPTITCANBEANYCOMPLEXTEXT" # it will encrypt and decrypt our properties
 

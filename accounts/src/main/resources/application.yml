@@ -24,6 +24,7 @@ spring:
     show-sql: true
   config:
     import: "optional:configserver:http://localhost:8071"
+#Refresh configurations at runtime using Spring Cloud Bus
   rabbitmq:
     host: "localhost"
     port: 5672

@@ -1,11 +1,11 @@
-# Docker Commands
+##### Docker Commands
 
 docker build . -t akash9229/accounts:v1 <br/>
 docker images <br/>
 docker inspect image <IMAGE ID> <br/>
 docker run -p 8080:8080 akash9229/accounts:v1 <br/>
 
-### Detach Mode
+#### Detach Mode
 docker run -d -p 8080:8080 akash9229/accounts:v1 <br/>
 
 #### Existing docker container right now in my system
@@ -30,6 +30,3 @@ docker pull akash9229/accounts:v1
 > docker compose down <br/>
 > docker compose stop <br/>
 > docker compose start
-
-#### RabbitMQ for Refresh configurations at runtime using Spring Cloud Bus
-sudo docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management
