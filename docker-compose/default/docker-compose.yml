@@ -11,6 +11,9 @@ services:
       timeout: 5s
       retries: 10
       start_period: 5s
+    networks:
+      - akashNetwork
+
   configserver:
     image: "akash9229/configserver:v1"
     container_name: configserver-ms
@@ -31,6 +34,7 @@ services:
           memory: 700m
     networks:
       - akashNetwork
+
   accounts:
     image: "akash9229/accounts:v1"
     container_name: accounts-ms
@@ -49,6 +53,7 @@ services:
 #      SPRING_APPLICATION_NAME: "accounts"
       SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071"
       SPRING_PROFILES_ACTIVE: default
+
   loan:
     image: "akash9229/loan:v1"
     container_name: loan-ms
@@ -67,6 +72,7 @@ services:
       #      SPRING_APPLICATION_NAME: "loan"
       SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071"
       SPRING_PROFILES_ACTIVE: default
+
   cards:
     image: "akash9229/cards:v1"
     container_name: cards-ms
@@ -85,6 +91,7 @@ services:
       #      SPRING_APPLICATION_NAME: "cards"
       SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071"
       SPRING_PROFILES_ACTIVE: default
+
 networks:
   akashNetwork:
     driver: "bridge"
