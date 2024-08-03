@@ -29,7 +29,7 @@ FROM eclipse-temurin:21-jdk
 MAINTAINER akash
 
 # Copy the application's jar from the build stage to the runtime stage
-COPY --from=build /app/target/accounts-0.0.1-SNAPSHOT.jar accounts-0.0.1-SNAPSHOT.jar
+COPY --from=build /app/target/loan-0.0.1-SNAPSHOT.jar loan-0.0.1-SNAPSHOT.jar
 
 # Execute the application
-ENTRYPOINT ["java", "-jar", "accounts-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "loan-0.0.1-SNAPSHOT.jar"]

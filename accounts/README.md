@@ -1,3 +1,16 @@
+## Building the Docker Image with a Specific Profile
+
+
+# For dev profile
+sudo docker build --build-arg PROFILE=dev -t akash9229/accounts:dev .
+
+# For prod profile
+sudo docker build --build-arg PROFILE=prod -t akash9229/accounts:prod .
+
+# For qa profile
+sudo docker build --build-arg PROFILE=qa -t akash9229/accounts:qa .
+
+
 ##### Docker Commands
 
 docker build . -t akash9229/accounts:v1 <br/>

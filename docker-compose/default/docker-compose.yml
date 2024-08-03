@@ -1,3 +1,5 @@
+version: 1.1
+
 services:
   rabbit:
     image: rabbitmq:3.13-management
@@ -16,7 +18,7 @@ services:
       service: network-deploy-service
 
   configserver:
-    image: "akash9229/configserver:v1"
+    image: "akash9229/configserver:dev"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -34,7 +36,7 @@ services:
       service: microservice-base-config
 
   accounts:
-    image: "akash9229/accounts:v1"
+    image: "akash9229/accounts:dev"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -45,7 +47,7 @@ services:
       service: microservice-configserver-config
 
   loan:
-    image: "akash9229/loan:v1"
+    image: "akash9229/loan:dev"
     container_name: loan-ms
     ports:
       - "8090:8090"
@@ -56,7 +58,7 @@ services:
       service: microservice-configserver-config
 
   cards:
-    image: "akash9229/cards:v1"
+    image: "akash9229/cards:dev"
     container_name: cards-ms
     ports:
       - "9000:9000"
