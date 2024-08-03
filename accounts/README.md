@@ -2,13 +2,8 @@
 
 
 # For dev profile
-sudo docker build --build-arg PROFILE=dev -t akash9229/accounts:dev .
+sudo docker build --build-arg PROFILE=dev -t akash9229/accounts:v1 .
 
-# For prod profile
-sudo docker build --build-arg PROFILE=prod -t akash9229/accounts:prod .
-
-# For qa profile
-sudo docker build --build-arg PROFILE=qa -t akash9229/accounts:qa .
 
 
 ##### Docker Commands
@@ -17,6 +12,7 @@ docker build . -t akash9229/accounts:v1 <br/>
 docker images <br/>
 docker inspect image <IMAGE ID> <br/>
 docker run -p 8080:8080 akash9229/accounts:v1 <br/>
+docker container stop <CONTAINER_ID>
 
 #### Detach Mode
 docker run -d -p 8080:8080 akash9229/accounts:v1 <br/>

@@ -1,4 +1,4 @@
-version: 1.1
+version: "1.2"
 
 services:
   rabbit:
@@ -18,7 +18,7 @@ services:
       service: network-deploy-service
 
   configserver:
-    image: "akash9229/configserver:dev"
+    image: "akash9229/configserver:v1"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -26,7 +26,8 @@ services:
       rabbit:
         condition: service_healthy
     healthcheck:
-      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      #test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent localhost:8071/actuator/health | grep UP || exit 1"
       interval: 10s
       timeout: 5s
       retries: 10
@@ -36,18 +37,18 @@ services:
       service: microservice-base-config
 
   accounts:
-    image: "akash9229/accounts:dev"
+    image: "akash9229/accounts:v1"
     container_name: accounts-ms
     ports:
       - "8080:8080"
     environment:
-#      SPRING_APPLICATION_NAME: "accounts"
+      SPRING_APPLICATION_NAME: "accounts"
     extends:
       file: common-config.yml
       service: microservice-configserver-config
 
   loan:
-    image: "akash9229/loan:dev"
+    image: "akash9229/loan:v1"
     container_name: loan-ms
     ports:
       - "8090:8090"
@@ -58,7 +59,7 @@ services:
       service: microservice-configserver-config
 
   cards:
-    image: "akash9229/cards:dev"
+    image: "akash9229/cards:v1"
     container_name: cards-ms
     ports:
       - "9000:9000"

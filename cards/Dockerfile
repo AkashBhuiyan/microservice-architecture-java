@@ -8,7 +8,7 @@ MAINTAINER akash
 WORKDIR /app
 
 # Set environment variable for profile (default to dev)
-ARG PROFILE=dev
+#ARG PROFILE=dev
 
 # Copy the pom.xml and any other required files
 COPY pom.xml .
@@ -20,7 +20,8 @@ RUN mvn dependency:go-offline
 COPY src ./src
 
 # Clean and package the application using the specified profile
-RUN mvn clean package -DskipTests -P ${PROFILE}
+#RUN mvn clean package -DskipTests -P ${PROFILE}
+RUN mvn clean package -DskipTests
 
 # Start a new stage from a Java runtime image
 FROM eclipse-temurin:21-jdk
