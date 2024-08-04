@@ -25,12 +25,12 @@ spring:
   config:
     import: "optional:configserver:http://localhost:8071"
 #Refresh configurations at runtime using Spring Cloud Bus
-  rabbitmq:
-    host: "localhost"
-    port: 5672
-    stream:
-      username: "guest"
-      password: "guest"
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    stream:
+#      username: "guest"
+#      password: "guest"
 
 management:
   endpoints:

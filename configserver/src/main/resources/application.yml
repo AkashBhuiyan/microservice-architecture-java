@@ -17,12 +17,12 @@ spring:
           clone-on-start: true
           force-pull: true
   #Refresh configurations at runtime using Spring Cloud Bus
-  rabbitmq:
-    host: "localhost"
-    port: 5672
-    stream:
-      username: "guest"
-      password: "guest"
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    stream:
+#      username: "guest"
+#      password: "guest"
 
 management:
   endpoints:
