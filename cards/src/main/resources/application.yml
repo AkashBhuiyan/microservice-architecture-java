@@ -8,6 +8,19 @@ spring:
     name: "cards"
   profiles:
     active: '@spring.active.profile@'
+
+  datasource:
+    url: jdbc:mysql://localhost:3308/cardsdb
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  sql:
+    init:
+      mode: always
+
   config:
     import: "optional:configserver:http://localhost:8071"
 #  rabbitmq:

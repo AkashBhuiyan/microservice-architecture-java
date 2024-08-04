@@ -56,4 +56,14 @@ To check the Liveness and Readiness status of your application, use the followin
 > **Note**: If the status is down, it indicates that the RabbitMQ server is not running. Ensure RabbitMQ is started using the Docker run command mentioned above.
 
 
+## Mysql DB for microservices
 
+```sh
+sudo docker run -p 3306:3306 --name accountsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=accountsdb -d mysql
+```
+```sh
+sudo docker run -p 3307:3306 --name loandb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=loandb -d mysql
+```
+```sh
+sudo docker run -p 3308:3306 --name cardsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=cardsdb -d mysql
+```
