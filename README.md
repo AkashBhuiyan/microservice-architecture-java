@@ -8,7 +8,7 @@
 To refresh configurations at runtime using Spring Cloud Bus, you'll need RabbitMQ running. You can set up RabbitMQ using Docker:
 
 ```sh
-sudo docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management
+docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management
 ```
 
 ## Refresh Configurations at Runtime Using Spring Cloud Bus & Spring Cloud Config Monitor
@@ -59,11 +59,11 @@ To check the Liveness and Readiness status of your application, use the followin
 ## Mysql DB for microservices
 
 ```sh
-sudo docker run -p 3306:3306 --name accountsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=accountsdb -d mysql
+docker run -p 3306:3306 --name accountsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=accountsdb -d mysql
 ```
 ```sh
-sudo docker run -p 3307:3306 --name loandb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=loandb -d mysql
+docker run -p 3307:3306 --name loandb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=loandb -d mysql
 ```
 ```sh
-sudo docker run -p 3308:3306 --name cardsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=cardsdb -d mysql
+docker run -p 3308:3306 --name cardsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=cardsdb -d mysql
 ```

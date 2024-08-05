@@ -2,7 +2,7 @@
 
 
 # For dev profile
-sudo docker build --build-arg PROFILE=dev -t akash9229/accounts:v1 .
+docker build --build-arg PROFILE=dev -t akash9229/accounts:v1 .
 
 
 
