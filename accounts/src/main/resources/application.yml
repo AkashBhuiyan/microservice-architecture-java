@@ -57,6 +57,7 @@ eureka:
     registerWithEureka: true
     serviceUrl:
       defaultZone: http://localhost:8070/eureka/
+
 info: # this information we can see it the eureka dashboard. This info information will be exposed as part of an actuator endpoint url & by default the info label actuator is not enabled.
   app:
     name: "accounts"

@@ -35,3 +35,31 @@ management:
     web:
       exposure:
         include: "*"  # enable and expose all management endpoint supported by the spring boot actuator
+  endpoint: # when loan microservice shutdown, It's deregister loan microservice with eureka server
+    shutdown:
+      enabled: true
+    info:
+      env:
+        enabled: true # enable info label actuator
+
+endpoint: # exposed shutdown related properties
+  shutdown:
+    enabled: true
+
+eureka:
+  instance:
+    prefer-ip-address: true # when my loan microservice it is trying to register with eureka server by default it will try to register with the hostname. The hostname make sense when you are
+                            # trying to DNS mapping inside your microservices network. But inside my local system there is no DNS setup. We should set `prefer-ip-address: true`.
+                            # my loan microservice will register with my eureka server by using the ip address. When my other microservices, they are trying to connect with my loan microservice
+                            # my eureka server is going to share the ip address of my loan microservice so that other microservice can connect to the loan' microservice.
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+info: # this information we can see it the eureka dashboard. This info information will be exposed as part of an actuator endpoint url & by default the info label actuator is not enabled.
+  app:
+    name: "loan"
+    description: "Bank loan application"
+    version: "1.0.0"
