@@ -38,9 +38,9 @@ management:
   endpoint: # when loan microservice shutdown, It's deregister loan microservice with eureka server
     shutdown:
       enabled: true
-    info:
-      env:
-        enabled: true # enable info label actuator
+  info:
+    env:
+      enabled: true # enable info label actuator
 
 endpoint: # exposed shutdown related properties
   shutdown:

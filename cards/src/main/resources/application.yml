@@ -38,9 +38,9 @@ management:
   endpoint: # when cards microservice shutdown, It's deregister cards microservice with eureka server
     shutdown:
       enabled: true
-    info:
-      env:
-        enabled: true # enable info label actuator
+  info:
+    env:
+      enabled: true # enable info label actuator
 
 endpoint: # exposed shutdown related properties
   shutdown:
