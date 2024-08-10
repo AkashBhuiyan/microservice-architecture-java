@@ -16,6 +16,13 @@ public class AccountsMapper {
         return accountsDto;
     }
 
+    public static com.akash.common.dto.AccountsDto mapToAccountsDto(Accounts accounts, com.akash.common.dto.AccountsDto accountsDto) {
+        accountsDto.setAccountNumber(accounts.getAccountNumber());
+        accountsDto.setAccountType(accounts.getAccountType());
+        accountsDto.setBranchAddress(accounts.getBranchAddress());
+        return accountsDto;
+    }
+
     public static Accounts mapToAccounts(AccountsDto accountsDto, Accounts accounts) {
         accounts.setAccountNumber(accountsDto.getAccountNumber());
         accounts.setAccountType(accountsDto.getAccountType());
