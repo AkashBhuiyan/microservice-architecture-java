@@ -1,4 +1,4 @@
-version: "3.1"
+version: "3.1.1"
 
 services:
 #  rabbit:
@@ -67,7 +67,7 @@ services:
 
   eurekaserver:
     image: "akash9229/eurekaserver:v1"
-    container_name: configserver-ms
+    container_name: eurekaserver-ms
     ports:
       - "8070:8070"
     #    depends_on:
