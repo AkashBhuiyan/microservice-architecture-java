@@ -34,6 +34,7 @@ COPY accounts/src ./src
 #RUN mvn dependency:go-offline
 
 # Build the accounts microservice
+#RUN mvn clean package -DskipTests -P ${PROFILE}
 RUN mvn clean package -DskipTests
 
 # Start a new stage from a Java runtime image
