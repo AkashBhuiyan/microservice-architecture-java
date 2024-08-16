@@ -27,11 +27,11 @@ services:
       service: microservice-db-config
 
   loandb:
-    container_name: loansdb
+    container_name: loandb
     ports:
       - 3307:3306 # 3307: expose outside world for access db. If you don't need to access the db in the outside world the delete this port
     environment:
-      MYSQL_DATABASE: loansdb
+      MYSQL_DATABASE: loandb
     extends:
       file: common-config.yml
       service: microservice-db-config
