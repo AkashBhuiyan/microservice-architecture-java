@@ -1,4 +1,4 @@
-version: "3.1.1"
+version: "3.2.0"
 
 services:
 #  rabbit:
@@ -73,6 +73,9 @@ services:
     #    depends_on:
     #      rabbit:
     #        condition: service_healthy
+    depends_on:
+      configserver:
+        condition: service_healthy
     healthcheck:
       #test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
       test: "curl --fail --silent localhost:8070/actuator/health | grep UP || exit 1"
@@ -82,10 +85,7 @@ services:
       start_period: 10s
     extends:
       file: common-config.yml
-      service: microservice-base-config
-    depends_on:
-      configserver:
-        condition: service_healthy
+      service: microservice-configserver-config
     environment:
       SPRING_APPLICATION_NAME: "eurekaserver"
 
@@ -100,9 +100,13 @@ services:
     depends_on:
       accountsdb:
         condition: service_healthy
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
   loan:
     image: "akash9229/loan:v1"
@@ -115,9 +119,13 @@ services:
     depends_on:
       loandb:
         condition: service_healthy
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
   cards:
     image: "akash9229/cards:v1"
@@ -130,9 +138,13 @@ services:
     depends_on:
       cardsdb:
         condition: service_healthy
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
 networks:
   akashNetwork:

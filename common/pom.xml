@@ -13,19 +13,6 @@
 	<version>0.0.1</version>
 	<name>common</name>
 	<description>Common project for all bank microservices </description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 	<properties>
 		<java.version>21</java.version>
 		<groupId>com.akash</groupId>
@@ -51,7 +38,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.5.0</version>
+			<version>2.6.0</version>
 		</dependency>
 
 		<dependency>
