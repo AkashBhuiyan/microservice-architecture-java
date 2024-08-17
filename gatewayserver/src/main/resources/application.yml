@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: "gatewayserver"
+  config:
+    import: "optional:configserver:http://localhost:8071"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # enable and expose all management endpoint supported by the spring boot actuator
+  endpoint:
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true # enable info label actuator
+
+info: # this information we can see it the eureka dashboard. This info information will be exposed as part of an actuator endpoint url & by default the info label actuator is not enabled.
+  app:
+    name: "gatewayserver"
+    description: "Bank Gateway Server application"
+    version: "1.0.0"
