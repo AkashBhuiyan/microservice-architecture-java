@@ -9,5 +9,5 @@ import com.akash.common.dto.CustomerDetailsDto;
 
 public interface ICustomersService {
 
-    CustomerDetailsDto fetchCustomerDetails(String mobileNumber);
+    CustomerDetailsDto fetchCustomerDetails(String mobileNumber, String correlationId);
 }

@@ -26,9 +26,6 @@ RUN mvn clean package -DskipTests
 # Start a new stage from a Java runtime image
 FROM eclipse-temurin:21-jdk
 
-# Information around who maintains the image
-MAINTAINER akash
-
 # Copy the application's jar from the build stage to the runtime stage
 COPY --from=build /app/target/gatewayserver-0.0.1-SNAPSHOT.jar gatewayserver-0.0.1-SNAPSHOT.jar
 

@@ -27,3 +27,10 @@ info: # this information we can see it the eureka dashboard. This info informati
     name: "gatewayserver"
     description: "Bank Gateway Server application"
     version: "1.0.0"
+
+logging: # activate the debug logger
+  level:
+    com:
+      akash:
+        gatewayserver: DEBUG
+
