@@ -1,4 +1,4 @@
-version: "3.2.0"
+version: "3.3.1"
 
 services:
   #  rabbit:
@@ -27,11 +27,11 @@ services:
       service: microservice-db-config
 
   loandb:
-    container_name: loansdb
+    container_name: loandb
     ports:
       - 3307:3306 # 3307: expose outside world for access db. If you don't need to access the db in the outside world the delete this port
     environment:
-      MYSQL_DATABASE: loansdb
+      MYSQL_DATABASE: loandb
     extends:
       file: common-config.yml
       service: microservice-db-config
@@ -55,8 +55,7 @@ services:
     #      rabbit:
     #        condition: service_healthy
     healthcheck:
-      #test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
-      test: "curl --fail --silent localhost:8071/actuator/health | grep UP || exit 1"
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
       timeout: 5s
       retries: 10
@@ -77,8 +76,7 @@ services:
       configserver:
         condition: service_healthy
     healthcheck:
-      #test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
-      test: "curl --fail --silent localhost:8070/actuator/health | grep UP || exit 1"
+      test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
       timeout: 5s
       retries: 10
@@ -94,6 +92,12 @@ services:
     container_name: accounts-ms
     ports:
       - "8080:8080"
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       SPRING_APPLICATION_NAME: "accounts"
       SPRING_DATASOURCE_URL: "jdbc:mysql://accountsdb:3306/accountsdb"
@@ -113,6 +117,12 @@ services:
     container_name: loan-ms
     ports:
       - "8090:8090"
+    healthcheck:
+      test: "curl --fail --silent localhost:8090/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       SPRING_APPLICATION_NAME: "loan"
       SPRING_DATASOURCE_URL: "jdbc:mysql://loandb:3306/loandb" # project and db are their own world. so no need to change the port to 3307
@@ -132,6 +142,12 @@ services:
     container_name: cards-ms
     ports:
       - "9000:9000"
+    healthcheck:
+      test: "curl --fail --silent localhost:9000/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       SPRING_APPLICATION_NAME: "cards"
       SPRING_DATASOURCE_URL: "jdbc:mysql://cardsdb:3306/cardsdb"
@@ -141,6 +157,24 @@ services:
       configserver:
         condition: service_healthy
       eurekaserver:
+        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
+  gatewayserver:
+    image: "akash9229/gatewayserver:v1"
+    container_name: gatewayserver-ms
+    ports:
+      - "8072:8072"
+    environment:
+      SPRING_APPLICATION_NAME: "gatewayserver"
+    depends_on:
+      accounts:
+        condition: service_healthy
+      cards:
+        condition: service_healthy
+      loan:
         condition: service_healthy
     extends:
       file: common-config.yml
