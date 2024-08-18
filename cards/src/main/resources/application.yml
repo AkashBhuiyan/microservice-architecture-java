@@ -35,9 +35,18 @@ management:
     web:
       exposure:
         include: "*"  # enable and expose all management endpoint supported by the spring boot actuator
+  health: # for checking the liveness and readiness of accounts ms to run the gatewayserver in docker compose.
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+
   endpoint: # when cards microservice shutdown, It's deregister cards microservice with eureka server
     shutdown:
       enabled: true
+    health:
+      probes:
+        enabled: true
   info:
     env:
       enabled: true # enable info label actuator
