@@ -21,17 +21,20 @@ public class GatewayserverApplication {
                 .route(p -> p
                         .path("/bank/accounts/**")
                         .filters(f -> f.rewritePath("/bank/accounts/(?<segment>.*)", "/${segment}")
-                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                                .circuitBreaker(config -> config.setName("accountsCircuitBreaker")))
                         .uri("lb://ACCOUNTS"))
                 .route(p -> p
                         .path("/bank/loan/**")
                         .filters(f -> f.rewritePath("/bank/loan/(?<segment>.*)", "/${segment}")
-                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                                .circuitBreaker(config -> config.setName("loanCircuitBreaker")))
                         .uri("lb://LOAN"))
                 .route(p -> p
                         .path("/bank/cards/**")
                         .filters(f -> f.rewritePath("/bank/cards/(?<segment>.*)", "/${segment}")
-                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                                .circuitBreaker(config -> config.setName("cardsCircuitBreaker")))
                         .uri("lb://CARDS"))
                 .build();
     }
