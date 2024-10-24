@@ -67,3 +67,14 @@ docker run -p 3307:3306 --name loandb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATAB
 ```sh
 docker run -p 3308:3306 --name cardsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=cardsdb -d mysql
 ```
+
+
+## Circuit Breaker & Events
+
+A Circuit Breaker helps prevent overloading a failing service by automatically stopping requests when the service is down and resuming requests once it's back online. Spring Boot's Actuator exposes various endpoints to monitor and manage Circuit Breakers, including retrieving Circuit Breaker events like errors, successes, and state changes. <br/>
+
+This project includes two key Actuator endpoints: <br/>
+
+- **/actuator/circuitbreakers**: Lists all available Circuit Breakers. (http://localhost:8072/actuator/circuitbreakers)
+- **/actuator/circuitbreakerevents**: Shows the events for a specific Circuit Breaker. (http://localhost:8072/actuator/circuitbreakerevents?name=accountsCircuitBreaker)
+- 

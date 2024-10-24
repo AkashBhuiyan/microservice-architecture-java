@@ -22,6 +22,11 @@ spring:
       mode: always
   config:
     import: "optional:configserver:http://localhost:8071"
+
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
 #Refresh configurations at realtime using Spring Cloud Bus
 #  rabbitmq:
 #    host: "localhost"
@@ -78,3 +83,12 @@ logging: # activate the debug logger
     com:
       akash:
         accounts: DEBUG
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10 # It will monitor the last 10 requests to decide whether to open or close the circuit.
+      permittedNumberOfCallsInHalfOpenState: 2 # If these 2 calls succeed, the Circuit Breaker will close and normal traffic will resume. If they fail, it will go back to an open state.
+      failureRateThreshold: 50 # If 50% or more of the recorded requests in the sliding window are failures, the Circuit Breaker will open, meaning it will stop making requests to the service.
+      waitDurationInOpenState: 10000 # This defines how long (in milliseconds or 10 seconds) the Circuit Breaker will remain in the open state before transitioning to half-open to test the system again.
+
