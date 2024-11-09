@@ -5,7 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @SpringBootApplication
@@ -28,7 +30,17 @@ public class GatewayserverApplication {
                 .route(p -> p
                         .path("/bank/loan/**")
                         .filters(f -> f.rewritePath("/bank/loan/(?<segment>.*)", "/${segment}")
-                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                                .retry(retryConfig -> retryConfig
+                                        .setRetries(3) // Retry up to 3 times if the request fails
+                                        .setMethods(HttpMethod.GET) // Apply retry only for GET requests
+                                        .setBackoff(
+                                                Duration.ofMillis(100),   // Initial backoff delay of 100 milliseconds
+                                                Duration.ofMillis(1000),  // Maximum backoff delay of 1000 milliseconds
+                                                2,                        // Exponential multiplier of 2 for each retry
+                                                true                      // Enable jitter to randomize backoff slightly and avoid retry spikes
+                                        )
+                                ))
                         .uri("lb://LOAN"))
                 .route(p -> p
                         .path("/bank/cards/**")
