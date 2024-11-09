@@ -6,6 +6,7 @@ import com.akash.accounts.dto.CustomerDto;
 import com.akash.accounts.dto.ErrorResponseDto;
 import com.akash.accounts.dto.ResponseDto;
 import com.akash.accounts.service.IAccountsService;
+import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,6 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -39,6 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
         name = "CRUD REST APIs for Accounts in Bank",
         description = "CRUD REST APIs in Bank to CREATE, UPDATE, FETCH AND DELETE account details"
 )
+@Slf4j
 @RequiredArgsConstructor
 @Validated
 @RestController
@@ -197,11 +200,20 @@ public class AccountsController {
             )
     }
     )
+    @Retry(name = "getBuildInfo", fallbackMethod = "getBuildInfoFallback") // Apply retry with 'getBuildInfo' config and fallback method
     @GetMapping("/build-info")
     public ResponseEntity<String> getBuildInfo() {
+        log.debug("getBuildInfo() method Invoked");
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(buildVersion);
+    }
+
+    public ResponseEntity<String> getBuildInfoFallback(Throwable throwable) {
+        log.debug("getBuildInfoFallback() method Invoked");
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("0.7");
     }
 
     @Operation(

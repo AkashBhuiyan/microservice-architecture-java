@@ -92,3 +92,16 @@ resilience4j.circuitbreaker:
       failureRateThreshold: 50 # If 50% or more of the recorded requests in the sliding window are failures, the Circuit Breaker will open, meaning it will stop making requests to the service.
       waitDurationInOpenState: 10000 # This defines how long (in milliseconds or 10 seconds) the Circuit Breaker will remain in the open state before transitioning to half-open to test the system again.
 
+resilience4j.retry:
+  configs:
+    default:
+      maxAttempts: 3                   # Maximum number of retry attempts (3 retries)
+      waitDuration: 500                # Wait duration between retries in milliseconds (500ms)
+      enableExponentialBackoff: true   # Enable exponential backoff for retries
+      exponentialBackoffMultiplier: 2  # Multiplier for exponential backoff (doubles the wait time each retry)
+      ignoreExceptions:
+        - java.lang.NullPointerException # Ignore retries for NullPointerException
+      retryExceptions:
+        - java.util.concurrent.TimeoutException # Retry only when TimeoutException occurs
+
+
