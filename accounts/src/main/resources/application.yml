@@ -104,4 +104,11 @@ resilience4j.retry:
       retryExceptions:
         - java.util.concurrent.TimeoutException # Retry only when TimeoutException occurs
 
+resilience4j.ratelimiter:
+  configs:
+    default:
+      timeoutDuration: 1000        # Timeout (in milliseconds) for acquiring permission. If a request cannot acquire permission within this time, it will be denied.
+      limitRefreshPeriod: 5000     # Interval (in milliseconds) for refreshing the available permissions (5 seconds here).
+      limitForPeriod: 1            # Number of requests allowed per refresh period. Allows 1 request every 5 seconds.
+
 
