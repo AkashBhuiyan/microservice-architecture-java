@@ -7,10 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.circuitbreaker.resilience4j.ReactiveResilience4JCircuitBreakerFactory;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JConfigBuilder;
 import org.springframework.cloud.client.circuitbreaker.Customizer;
+import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
+import org.springframework.cloud.gateway.filter.ratelimit.RedisRateLimiter;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -50,7 +53,12 @@ public class GatewayserverApplication {
                 .route(p -> p
                         .path("/bank/cards/**")
                         .filters(f -> f.rewritePath("/bank/cards/(?<segment>.*)", "/${segment}")
-                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()) // Adds a custom response header "X-Response-Time" with the current timestamp
+                                .requestRateLimiter(config -> config
+                                        .setRateLimiter(redisRateLimiter()) // Configures rate limiting using the RedisRateLimiter bean defined below
+                                        .setKeyResolver(userKeyResolver())  // Uses the KeyResolver bean to identify users based on a header (e.g., "user")
+                                )
+                        )
                         .uri("lb://CARDS"))
                 .build();
     }
@@ -68,6 +76,23 @@ public class GatewayserverApplication {
                         )
                         .build()
         );
+    }
+
+    @Bean
+    public RedisRateLimiter redisRateLimiter() {
+        // Replenish Rate: 1 token per second (this controls how fast tokens are added to the bucket)
+        // Burst Capacity: 1 (this is the maximum number of tokens the bucket can hold, allowing 1 burst request)
+        // Requested Tokens: 1 (each request consumes 1 token)
+        return new RedisRateLimiter(1, 1, 1);
+    }
+
+    @Bean
+    KeyResolver userKeyResolver() {
+        // Defines how to resolve the user based on the request headers.
+        // If the 'user' header is present, it resolves the user from that header.
+        // If the 'user' header is not found, it defaults to "anonymous".
+        return exchange -> Mono.justOrEmpty(exchange.getRequest().getHeaders().getFirst("user"))
+                .defaultIfEmpty("anonymous");
     }
 
 }

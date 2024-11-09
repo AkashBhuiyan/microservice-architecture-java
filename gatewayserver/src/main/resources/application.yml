@@ -8,6 +8,12 @@ spring:
       httpclient:
         connect-timeout: 1000
         response-timeout: 3s
+  data:
+    redis:
+      connect-timeout: 2s        # Timeout duration for establishing a connection to Redis (2 seconds)
+      host: localhost            # The Redis server's host address (localhost in this case)
+      port: 6379                 # The port Redis server is listening on (default port for Redis is 6379)
+      timeout: 1s                # Timeout duration for reading or writing data from/to Redis (1 second)
 
 management:
   endpoints:

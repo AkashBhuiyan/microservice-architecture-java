@@ -77,4 +77,32 @@ This project includes two key Actuator endpoints: <br/>
 
 - **/actuator/circuitbreakers**: Lists all available Circuit Breakers. (http://localhost:8072/actuator/circuitbreakers)
 - **/actuator/circuitbreakerevents**: Shows the events for a specific Circuit Breaker. (http://localhost:8072/actuator/circuitbreakerevents?name=accountsCircuitBreaker)
-- 
+
+
+## Redis Server for Redis Rate Limiter
+
+To start a Redis server using Docker, run the following command:
+
+```shell
+docker run -p 6379:6379 --name bankredis -d redis
+```
+
+## Load Testing with Apache Benchmark
+
+To install Apache Benchmark (ab), use the following command:
+
+```shell
+sudo apt install apache2-utils
+```
+
+```shell
+ab -n 10 -c 2 -v 3 http://localhost:8072/bank/card/api/contact-info
+```
+
+### Command Breakdown
+
+- `-n 10`: Specifies the total number of requests to perform (10 requests).
+- `-c 2`: Sets the number of concurrent requests (2 users).
+- `-v 3`: Defines the verbosity level for detailed output (3 for maximum detail).
+
+
