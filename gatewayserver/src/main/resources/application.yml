@@ -10,9 +10,10 @@ spring:
           enabled: false        # This disables the automatic route generation for services from the service registry.
           lowerCaseServiceId: true  # This ensures that all service IDs are converted to lowercase for consistent routing.
 
-      httpclient:
-        connect-timeout: 1000
-        response-timeout: 3s
+      httpclient: # Configures HTTP client properties used by the application for making HTTP requests.
+        connect-timeout: 1000  # Sets the connection timeout in milliseconds (1000 ms = 1 second). This is the maximum time allowed to establish a connection to a server.
+        response-timeout: 10s  # Specifies the maximum time to wait for a response from the server (microservices), set here as 10 seconds.
+
   data:
     redis:
       connect-timeout: 2s        # Timeout duration for establishing a connection to Redis (2 seconds)
