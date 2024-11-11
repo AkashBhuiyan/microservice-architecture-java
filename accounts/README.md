@@ -9,6 +9,12 @@ docker build --build-arg PROFILE=dev -t akash9229/accounts:v1 .
 ##### Docker Commands
 
 docker build . -t akash9229/accounts:v1 <br/>
+
+To build with common from root folder: 
+```sh 
+docker build -t akash9229/accounts:v1 -f accounts/Dockerfile .
+```
+
 docker images <br/>
 docker inspect image <IMAGE ID> <br/>
 docker run -p 8080:8080 akash9229/accounts:v1 <br/>

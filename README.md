@@ -106,3 +106,6 @@ ab -n 10 -c 2 -v 3 http://localhost:8072/bank/card/api/contact-info
 - `-v 3`: Defines the verbosity level for detailed output (3 for maximum detail).
 
 
+## Grafana for log
+
+link: https://grafana.com/docs/loki/latest/get-started/quick-start/
