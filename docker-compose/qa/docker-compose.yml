@@ -1,4 +1,4 @@
-version: "3.3.1"
+version: "3.4.1"
 
 services:
   #  rabbit:
@@ -57,6 +57,7 @@ services:
     extends:
       file: common-config.yml
       service: network-deploy-service
+
 
   configserver:
     image: "akash9229/configserver:v1"
@@ -181,12 +182,18 @@ services:
       - "8072:8072"
     environment:
       SPRING_APPLICATION_NAME: "gatewayserver"
+      SPRING_DATA_REDIS_CONNECT-TIMEOUT: 2s
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      SPRING_DATA_REDIS_TIMEOUT: 1s
     depends_on:
       accounts:
         condition: service_healthy
       cards:
         condition: service_healthy
       loan:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     extends:
       file: common-config.yml
