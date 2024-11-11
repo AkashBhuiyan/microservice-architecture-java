@@ -5,6 +5,11 @@ spring:
     import: "optional:configserver:http://localhost:8071"
   cloud:
     gateway:
+      discovery:                # The root property for service discovery configuration.
+        locator:                # Configuration related to the discovery locator feature.
+          enabled: false        # This disables the automatic route generation for services from the service registry.
+          lowerCaseServiceId: true  # This ensures that all service IDs are converted to lowercase for consistent routing.
+
       httpclient:
         connect-timeout: 1000
         response-timeout: 3s
