@@ -55,8 +55,11 @@ management:
   info:
     env:
       enabled: true # enable info label actuator
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
-endpoint: # exposed shutdown related properties
+endpoints: # exposed shutdown related properties
   shutdown:
     enabled: true
 
