@@ -1,6 +1,17 @@
 # Spring Cloud Config Server for real time configuration Setup Guide
 
-## Prerequisites
+## Build all the docker images
+
+```sh
+chmod +x build-docker-images.sh
+```
+
+```sh
+./build-docker-images.sh v1
+```
+If no version is provided, it will default to version 1.
+
+## Prerequisites For Hookdeck
 - Ensure you have Docker installed.
 - Install Hookdeck CLI for managing webhooks.
 
