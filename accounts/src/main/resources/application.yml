@@ -86,6 +86,13 @@ logging: # activate the debug logger
     com:
       akash:
         accounts: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+      # Explanation:
+      # %5p          # Log level (e.g., INFO, DEBUG, ERROR), formatted to a width of 5 characters for alignment.
+      # ${spring.application.name}  # Inserts the name of the current Spring Boot application for identification.
+      # %X{trace_id} # Extracts and includes the trace ID from the Mapped Diagnostic Context (MDC), crucial for distributed tracing.
+      # %X{span_id}  # Extracts and includes the span ID from the MDC, indicating a specific operation within the trace.
 
 resilience4j.circuitbreaker:
   configs:

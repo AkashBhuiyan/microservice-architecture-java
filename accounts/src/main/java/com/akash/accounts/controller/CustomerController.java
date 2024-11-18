@@ -63,7 +63,9 @@ public class CustomerController {
                                                                             message = "Mobile number must be 11 digits")
                                                                                            String mobileNumber) {
         logger.debug("bank correlation id found {}", correlationId);
+        logger.debug("fetchCustomerDetails method start");
         CustomerDetailsDto customerDetailsDto = iCustomersService.fetchCustomerDetails(mobileNumber, correlationId);
+        logger.debug("fetchCustomerDetails method end");
         return ResponseEntity.status(HttpStatus.SC_OK).body(customerDetailsDto);
 
     }

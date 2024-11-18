@@ -81,3 +81,5 @@ logging: # activate the debug logger
     com:
       akash:
         loan: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
