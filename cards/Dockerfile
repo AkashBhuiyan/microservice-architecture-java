@@ -2,7 +2,7 @@
 FROM maven:3.9.7-eclipse-temurin-21 AS build
 
 # Information around who maintains the image
-MAINTAINER akash
+LABEL maintainer="akash"
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -23,14 +23,18 @@ COPY src ./src
 #RUN mvn clean package -DskipTests -P ${PROFILE}
 RUN mvn clean package -DskipTests
 
+# Copy an external library (e.g., an OpenTelemetry agent JAR)
+RUN mkdir -p /app/libs && \
+    cp /root/.m2/repository/io/opentelemetry/javaagent/opentelemetry-javaagent/1.33.5/opentelemetry-javaagent-1.33.5.jar /app/libs/
+
 # Start a new stage from a Java runtime image
 FROM eclipse-temurin:21-jdk
 
-# Information around who maintains the image
-MAINTAINER akash
-
 # Copy the application's jar from the build stage to the runtime stage
 COPY --from=build /app/target/cards-0.0.1-SNAPSHOT.jar cards-0.0.1-SNAPSHOT.jar
+
+# Copy the external library to the runtime stage
+COPY --from=build /app/libs/opentelemetry-javaagent-1.33.5.jar /app/libs/opentelemetry-javaagent-1.33.5.jar
 
 # Execute the application
 ENTRYPOINT ["java", "-jar", "cards-0.0.1-SNAPSHOT.jar"]

@@ -1,14 +1,11 @@
-# Start with a Maven image that contains Java 21 runtime
+# Start with a Maven image containing Java 21 runtime
 FROM maven:3.9.7-eclipse-temurin-21 AS build
 
 # Information around who maintains the image
-MAINTAINER akash
+LABEL maintainer="akash"
 
 # Set the working directory inside the container
 WORKDIR /app
-
-# Set environment variable for profile (default to dev)
-#ARG PROFILE=dev
 
 # Copy the pom.xml and any other required files
 COPY pom.xml .
@@ -19,18 +16,21 @@ RUN mvn dependency:go-offline
 # Copy the source code to the container
 COPY src ./src
 
-# Clean and package the application using the specified profile
-#RUN mvn clean package -DskipTests -P ${PROFILE}
+# Clean and package the application
 RUN mvn clean package -DskipTests
 
-# Start a new stage from a Java runtime image
-FROM eclipse-temurin:21-jdk
+# Copy the JAR to the desired location directly
+RUN mkdir -p /app/libs && \
+    cp /root/.m2/repository/io/opentelemetry/javaagent/opentelemetry-javaagent/1.33.5/opentelemetry-javaagent-1.33.5.jar /app/libs/
 
-# Information around who maintains the image
-MAINTAINER akash
+# Runtime image with Java
+FROM eclipse-temurin:21-jre
 
-# Copy the application's jar from the build stage to the runtime stage
-COPY --from=build /app/target/configserver-0.0.1-SNAPSHOT.jar configserver-0.0.1-SNAPSHOT.jar
+# Copy the application JAR from the build stage
+COPY --from=build /app/target/configserver-0.0.1-SNAPSHOT.jar /app/configserver-0.0.1-SNAPSHOT.jar
+
+# Copy the agent JAR to the runtime stage
+COPY --from=build /app/libs/opentelemetry-javaagent-1.33.5.jar /app/libs/opentelemetry-javaagent-1.33.5.jar
 
 # Execute the application
-ENTRYPOINT ["java", "-jar", "configserver-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/app/configserver-0.0.1-SNAPSHOT.jar"]
