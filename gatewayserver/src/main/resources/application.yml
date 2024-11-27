@@ -24,6 +24,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
+          # Retrieves the public signing certificates from the authorization server
+          # to validate the incoming JWT tokens in the resource server.
           jwk-set-uri: "http://localhost:7080/realms/master/protocol/openid-connect/certs"
 
 management:
