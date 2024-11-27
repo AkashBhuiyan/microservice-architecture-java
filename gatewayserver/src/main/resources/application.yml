@@ -20,6 +20,11 @@ spring:
       host: localhost            # The Redis server's host address (localhost in this case)
       port: 6379                 # The port Redis server is listening on (default port for Redis is 6379)
       timeout: 1s                # Timeout duration for reading or writing data from/to Redis (1 second)
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "http://localhost:7080/realms/master/protocol/openid-connect/certs"
 
 management:
   endpoints:
