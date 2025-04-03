@@ -1,6 +1,6 @@
 # Spring Cloud Config Server for real time configuration Setup Guide
 
-# Microservices Architecture Diagram
+## Microservices Architecture Diagram
 ![Microservices Architecture](ProjectDiagram.png)
 
 ## Build all the docker images
