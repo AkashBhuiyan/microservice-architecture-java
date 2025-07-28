@@ -1,0 +1,83 @@
+server:
+  port: 0  # Let Spring Boot choose a random port to avoid conflicts
+
+spring:
+  application:
+    name: cards-test
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop  # Clean schema for each test run
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  sql:
+    init:
+      mode: always
+
+  main:
+    allow-bean-definition-overriding: true
+
+# Disable cloud dependencies for test
+eureka:
+  client:
+    enabled: false
+  instance:
+    register-with-eureka: false
+
+spring.cloud.config.enabled: false
+spring.cloud.openfeign.circuitbreaker.enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  health:
+    probes:
+      enabled: false
+  endpoint:
+    shutdown:
+      enabled: false
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        failureRateThreshold: 100  # open fast in case you're testing failure
+  retry:
+    configs:
+      default:
+        maxAttempts: 1  # no retry during test
+  ratelimiter:
+    configs:
+      default:
+        limitForPeriod: 1000  # effectively no limit during tests
+
+logging:
+  level:
+    root: WARN
+    com.akash.cards: DEBUG
+
+build:
+  version: "3.0"
+
+cards:
+  message: "Welcome to Bank cards related local APIs "
+  contactDetails:
+    name: "Akash - Developer"
+    email: "akash@example.com"
+  onCallSupport:
+    - +8801XXXXXXXXX
+    - +8801XXXXXXXX3
