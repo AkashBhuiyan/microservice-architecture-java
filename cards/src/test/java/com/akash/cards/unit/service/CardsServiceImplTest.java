@@ -90,7 +90,7 @@ public class CardsServiceImplTest {
     void updateCard_ShouldUpdateCard_WhenExists() {
         CardsDto cardsDto = new CardsDto();
         cardsDto.setCardNumber(cards.getCardNumber());
-        cardsDto.setCardType("Updated");
+        cardsDto.setCardType(CardsConstants.CREDIT_CARD);
 
         when(cardsRepository.findByCardNumber(cardsDto.getCardNumber()))
                 .thenReturn(Optional.of(cards));
