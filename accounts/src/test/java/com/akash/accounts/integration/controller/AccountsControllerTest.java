@@ -1,4 +1,4 @@
-package com.akash.accounts.integration.service;
+package com.akash.accounts.integration.controller;
 
 import com.akash.accounts.dto.AccountsDto;
 import com.akash.accounts.dto.CustomerDto;
